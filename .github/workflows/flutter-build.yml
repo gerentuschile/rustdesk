@@ -147,6 +147,14 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Aplicar servidor y clave Gerentus (branding)
+        shell: bash
+        run: |
+          sed -i 's#rs-ny.rustdesk.com#soporte.gerentus.com#g' libs/hbb_common/src/config.rs
+          sed -i 's#OeVuKk5nlHiXp[+]APNn0Y3pC1Iwpwn44JGqrQCsWqmBw=#zq4X/vz5Fm+unE01iMfpienExCwQ7800j15iIf5pQNM=#g' libs/hbb_common/src/config.rs
+          echo "== Config Gerentus aplicada =="
+          grep -nE 'RENDEZVOUS_SERVERS: |RS_PUB_KEY: ' libs/hbb_common/src/config.rs | head
+
       - name: Restore bridge files
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
